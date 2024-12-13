@@ -1,33 +1,19 @@
 //
-//  SelectCurrency.swift
+//  IconGrid.swift
 //  LOTRConverterApp
 //
 //  Created by Zainab Alatwi  on 03/06/1446 AH.
 // تعلت كيغ اعدل على الاسم
 import SwiftUI
-struct SelectCurrency: View {
-    
-    @Environment(\.dismiss)var dismiss
-    @State var currency : Currency
+// هذي الصفحه بس لتكرار الالعملات
+// نحذف كل شي ماعادا LAZY
+struct IconGrid: View {
+
+    @Binding var currency : Currency
+    // لما نستخدم هذا المتغير في الكود لازم الاستدعاء يكون قبل اسمه $
     
     var body: some View {
-        ZStack{
-            // BackgroundImage
-            Image(.parchment)
-                .resizable()
-                .scaledToFill()
-                .background(.brown)
-                .ignoresSafeArea()
-            
-            VStack{
-                // text
-                Text("Select The Currency you are starting with:")
-                    .fontWeight(.bold)
-                
-                
-               
-                // راح استخدم LazyVGrid هي اللي ترتب لي العناصر كاعمده بدل ما اسوي في ستاك واتش ستاك  واقدر اعط الاعمده علي( كيفي
-                
+       
                 
                 LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]){
                     
@@ -61,33 +47,10 @@ struct SelectCurrency: View {
                
                 
                 
-                // text
-                Text(" Select the currency you  would like to convert to:")
-                    .fontWeight(.bold)
-                    
-                
-                //currency Icon
-              
-                
-                
-                // Done Button
-                Button("Done"){
-                    
-                    dismiss()
-                    
-                }.buttonStyle(.borderedProminent)// عشان نشكل الخلفيه للبوتن فيه خيارات كثره ممتازه بدل ماستخدم الراوند ريكتانقل
-                    .tint(.brown.mix(with: .black, by: 0.2)) // مره مفيده لمكس الالوان
-                    .font(.largeTitle)
-                    .padding()
-                    .foregroundColor(.white)//  تستخدم للدارك مود
-                
-                
-            }
-            .padding(100)
-            .multilineTextAlignment(.center)
         }
     }
-}
 #Preview {
-    SelectCurrency(currency: .copperPenny) // Self هذا هو اللي يقارنها مع الاشياء اللي بال فور لوب
+    //اذا سوينا بايندينق لازم نعرف تحت المتغير مره ثانيه  من نوع ستسيت وبريف يو بال
+    @Previewable @State var currency: Currency = .silverPenny
+    IconGrid(currency: $currency) // Self هذا هو اللي يقارنها مع الاشياء اللي بال فور لوب
 }
